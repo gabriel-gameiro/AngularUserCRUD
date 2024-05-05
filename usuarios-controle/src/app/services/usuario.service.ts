@@ -3,19 +3,49 @@ import { Usuario } from '../models/usuario';
 import { UtilService } from './util.service';
 import { rejects } from 'assert';
 import { randomInt } from 'crypto';
+import { FiltroUsuario } from '../models/filtro-usuario';
+import { RetornoPaginacao } from '../models/retorno-paginacao';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  constructor(private utilService: UtilService) { }
+  constructor() { }
 
   private urlApi = "http://localhost:3000/usuarios";
 
-  async obterUsuarios() : Promise<Usuario[]> {
+  async obterUsuarios(filtro: FiltroUsuario) : Promise<RetornoPaginacao<Usuario>> {
+    // Idealmente o filtro e a paginação seriam repassados para a API fazer a filtragem diretamente na base de dados, para de fato aplicar a melhora de desempenho.
+    // Mas na falta de controle sobre a api, estou fazendo diretamente aqui no front
     const data = await fetch(this.urlApi);
-    return await data.json() ?? [];
+    let usuarios: Usuario[] = await data.json() ?? []
+
+    console.log(usuarios);
+  
+
+    if(filtro.cpf)
+      usuarios = usuarios.filter((e) => e.cpf == filtro.cpf)
+
+    if(filtro.dataNascimento)
+      usuarios = usuarios.filter((e) => e.dataNascimento == filtro.dataNascimento)
+
+    if(filtro.nome)
+      usuarios = usuarios.filter((e) => e.nome.toLowerCase().includes(filtro.nome.toLowerCase()))
+
+    const qtdPaginas = Math.ceil(usuarios.length / filtro.tamanhoPagina);
+
+    if(filtro.paginaAtual && filtro.tamanhoPagina) {
+      const inicio = filtro.tamanhoPagina * (filtro.paginaAtual - 1)
+      usuarios = usuarios.slice(inicio, inicio + filtro.tamanhoPagina);
+    }
+
+    const retorno: RetornoPaginacao<Usuario> = {
+      quantidadePaginas: qtdPaginas,
+      registros: usuarios
+    }
+
+    return retorno;
   }
 
   async obterUsuario(id: number) : Promise<Usuario> {

@@ -5,6 +5,28 @@
   </div>
 
   <div class="card-body">
+    <div class="row mb-4">
+      <div class="col-3">
+        <label>Nome</label>
+        <input type="text" class="form-control" [(ngModel)]="filtro.nome">
+      </div>
+      <div class="col-3">
+        <label>CPF</label>
+        <input type="text" class="form-control" [(ngModel)]="filtro.cpf">
+      </div>
+      <div class="col-3">
+        <label>Nascimento</label>
+        <input type="text" class="form-control" [(ngModel)]="filtro.dataNascimento">
+      </div>
+      <div class="col-3 d-flex justify-content-end ">
+        <button class="btn btn-outline-secondary rounded-pill align-self-end" (click)="carregarUsuarios()">
+          Aplicar Filtros
+        </button>
+      </div>
+    </div>
+
+    <a class="btn btn-outline-success rounded-pill mb-4"  routerLink="/usuario/0">Adicionar novo Usuário</a>
+
     <table class="table">
       <thead>
         <tr>
@@ -28,8 +50,20 @@
       </tbody>
     </table>
   </div>
+  
+  <div class="card-footer mt-2 pt-2 d-flex justify-content-between">
+    <div class="text-muted ">
+      Página {{filtro.paginaAtual}} de {{qtdPaginas}}
+    </div>
 
-  <div class="card-footer d-flex justify-content-end">
-    <a class="btn btn-outline-success rounded-pill"  routerLink="/usuario/0">Adicionar</a>
+    <div *ngIf="qtdPaginas > 1">
+      <button *ngIf="filtro.paginaAtual > 1" class="btn btn-small btn-outline-secondary p-1" (click)="voltarPagina()">
+        <i class='bx bx-chevron-left'></i>
+      </button>
+      <span class="ms-2 me-2 align-self-center">{{filtro.paginaAtual}}</span>
+      <button *ngIf="qtdPaginas != filtro.paginaAtual" class="btn btn-small btn-outline-secondary p-1" (click)="avancarPagina()"> 
+        <i class='bx bx-chevron-right'></i> 
+      </button>
+    </div>
   </div>
 </div>
