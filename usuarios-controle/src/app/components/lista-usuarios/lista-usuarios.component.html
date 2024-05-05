@@ -1,0 +1,35 @@
+
+<div *ngIf="listaUsuarios" class="card">
+  <div class="card-header bg-primary text-white">
+    <h2 class="m-0">Lista de Usuários</h2>
+  </div>
+
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Data Cadastro</th>
+          <th>Renda Mensal</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of listaUsuarios">
+            <td>{{usuario.nome}}</td>
+            <td>{{usuario.cpf | cpf}}</td>
+            <td>{{usuario.dataCadastro | date:'dd/MM/yyyy'}}</td>
+            <td>{{usuario.rendaMensal.toFixed(2) | currency:'BRL'}}</td>
+            <td><a class="btn btn-sm btn-outline-primary rounded-pill" routerLink="/usuario/{{usuario.id}}" >Detalhar</a></td>
+            <td><button class="btn btn-sm btn-outline-danger rounded-pill" (click)="deletarUsuario(usuario.id)">Excluir</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-footer d-flex justify-content-end">
+    <a class="btn btn-outline-success rounded-pill"  routerLink="/usuario/0">Adicionar</a>
+  </div>
+</div>

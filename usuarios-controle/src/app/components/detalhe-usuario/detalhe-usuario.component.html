@@ -1,0 +1,60 @@
+
+<div *ngIf="usuario" class="card">
+  <div class="card-header bg-primary text-white">
+    <h2 class="m-0">Lista de Usuários</h2>
+  </div>
+
+  <div class="card-body">
+
+    <form [formGroup]="formGroup" (ngSubmit)="formGroup.valid" novalidate>
+      <div class="row mb-4">
+        <div class="col-6">
+          <label>CPF</label>
+          <input type="text" class="form-control" formControlName="cpf" mask="000.000.000-00">
+          <label class="text-danger" *ngIf="formGroup.controls['cpf'].value && formGroup.controls['cpf'].errors">
+            CPF digitado não é válido!
+          </label>
+        </div>
+        <div class="col-6">
+            <label>Nome</label>
+            <input type="text" class="form-control" formControlName="nome">
+            <label class="text-danger" *ngIf="formGroup.controls['nome'].value && formGroup.controls['nome'].errors">
+              Nome digitado não é válido!
+            </label>
+        </div>
+      </div>
+      
+      <div class="row mb-4">
+        <div class="col-6">
+            <label>Nascimento</label>
+            <input type="date" class="form-control" formControlName="dataNascimento">
+            <label class="text-danger" *ngIf="formGroup.controls['dataNascimento'].value && formGroup.controls['dataNascimento'].errors">
+              Data digitada não é válida!
+            </label>
+        </div>
+        <div class="col-6">
+            <label>Renda</label>
+            <input type="number" class="form-control" formControlName="renda">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+            <label>Data de Cadastro</label>
+            <input type="date" class="form-control" formControlName="dataCadastro">
+        </div>
+        <div class="col-6">
+            <label>Email</label>
+            <input type="text" class="form-control" formControlName="email">
+        </div>
+      </div>
+    </form>
+  
+  
+  </div>
+  
+  <div class="card-footer pb-4 d-flex justify-content-between">
+    <button class="btn btn-outline-secondary rounded-pill" (click)="voltar()">Cancelar</button>
+    <button class="btn btn-outline-dark rounded-pill" [disabled]="!formGroup.valid" (click)="salvarUsuario()">Salvar</button>
+  </div>
+</div>

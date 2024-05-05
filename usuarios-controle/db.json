@@ -1,0 +1,40 @@
+{
+  "usuarios": [
+    {
+      "id": "3",
+      "nome": "Gabriel Maneiro",
+      "cpf": "48614198833",
+      "dataCadastro": "2222-02-22",
+      "dataNascimento": "2001-11-22",
+      "email": "aaaa",
+      "rendaMensal": 5000
+    },
+    {
+      "id": "287337",
+      "nome": "Diana Banana",
+      "cpf": "48614198833",
+      "dataCadastro": "2001-11-22",
+      "dataNascimento": "2001-11-22",
+      "email": "aaa@aaa",
+      "rendaMensal": 0
+    },
+    {
+      "id": "928354",
+      "nome": "Apollo Vaquinha",
+      "cpf": "48614198833",
+      "dataCadastro": "2020-04-14",
+      "dataNascimento": "2001-11-22",
+      "email": "apollo@vaca.com",
+      "rendaMensal": 5000
+    },
+    {
+      "id": "558418",
+      "nome": "Amanda Frutas",
+      "cpf": "64882287064",
+      "dataCadastro": "2024-05-05",
+      "dataNascimento": "2000-01-07",
+      "email": "email@email.com",
+      "rendaMensal": 2
+    }
+  ]
+}
